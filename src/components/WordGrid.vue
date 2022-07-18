@@ -2,25 +2,46 @@
   <div id=wrapper>
     <div class=grid>
       <div class=row>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
       </div>
       <div class=row>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
       </div>
       <div class=row>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
-        <div class=row-item>A</div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+      </div>
+      <div class=row>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+      </div>
+      <div class=row>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+      </div>
+      <div class=row>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
+        <div class=row-item></div>
       </div>
     </div>
   </div>
@@ -61,8 +82,8 @@ export default {
   display: grid;
   grid-gap: 5px;
 
-  width: 7em;
-  height: 7em;
+  width: 4em;
+  height: 4em;
   border: 2px solid #3A3A3C;
 }
 

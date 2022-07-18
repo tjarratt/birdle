@@ -1,15 +1,18 @@
 <template>
   <h1>Birdle</h1>
   <WordGrid />
+  <KeyboardGrid />
 </template>
 
 <script>
 import WordGrid from './components/WordGrid.vue'
+import KeyboardGrid from './components/KeyboardGrid.vue'
 
 export default {
   name: 'App',
   components: {
     WordGrid,
+    KeyboardGrid,
   }
 }
 </script>
