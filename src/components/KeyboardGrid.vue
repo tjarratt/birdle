@@ -37,13 +37,40 @@
       </div>
     </div>
   </div>
+
+  <input autofocus maxlength=5 @keyup="onKeyup" />
 </template>
 
 <script>
 
 export default {
-  name: 'WordGrid',
+  name: 'KeyboardGrid',
   props: { },
+  emits: ["guess"],
+  data() {
+    return {
+      currentGuess: "",
+    }
+  },
+  methods: {
+    onKeyup: function(event) {
+      if (event.keyCode == 13) {
+        this.$emit("guess", this.currentGuess);
+        this.currentGuess = "";
+        return;
+      }
+      if (event.keyCode == 8) {
+        this.currentGuess = this.currentGuess.slice(0, -1);
+        return;
+      }
+      if (event.keyCode < 65 || event.keyCode > 90) {
+        console.log("bogus key", event.key, event.keyCode);
+        return;
+      }
+
+      this.currentGuess += event.key;
+    },
+  },
 }
 
 </script> 

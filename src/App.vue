@@ -1,7 +1,7 @@
 <template>
   <h1>Birdle</h1>
-  <WordGrid />
-  <KeyboardGrid />
+  <WordGrid :guesses="guesses"/>
+  <KeyboardGrid @guess="onGuess"/>
 </template>
 
 <script>
@@ -13,7 +13,17 @@ export default {
   components: {
     WordGrid,
     KeyboardGrid,
-  }
+  },
+  data() {
+    return {
+      guesses: [],
+    }
+  },
+  methods: {
+    onGuess: function(guess) {
+      this.guesses.push(guess);
+    }
+  },
 }
 </script>
 
