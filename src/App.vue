@@ -1,7 +1,7 @@
 <template>
   <h1>Birdle</h1>
-  <WordGrid :guesses="guesses"/>
-  <KeyboardGrid @guess="onGuess"/>
+  <WordGrid :solution="solution" :guesses="guesses"/>
+  <KeyboardGrid @guess="submitGuess" @update="onTyping"/>
 </template>
 
 <script>
@@ -16,13 +16,20 @@ export default {
   },
   data() {
     return {
-      guesses: [],
+      guesses: ["", "", "", "", "", ""],
+      guessCount: 0,
+      currentGuess: "",
+      solution: "avion",
     }
   },
   methods: {
-    onGuess: function(guess) {
-      this.guesses.push(guess);
-    }
+    submitGuess: function(guess) {
+      this.guesses[this.guessCount] = (guess);
+      this.guessCount++;
+    },
+    onTyping: function(guess) {
+      this.guesses[this.guessCount] = guess;
+    },
   },
 }
 </script>

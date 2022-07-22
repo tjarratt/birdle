@@ -2,43 +2,43 @@
   <div id=wrapper>
     <div class=grid>
       <div class=row>
-        <button class=row-key>Q</button>
-        <button class=row-key>W</button>
-        <button class=row-key>E</button>
-        <button class=row-key>R</button>
-        <button class=row-key>T</button>
-        <button class=row-key>Y</button>
-        <button class=row-key>U</button>
-        <button class=row-key>I</button>
-        <button class=row-key>O</button>
-        <button class=row-key>P</button>
+        <button @click=onTap class=row-key>Q</button>
+        <button @click=onTap class=row-key>W</button>
+        <button @click=onTap class=row-key>E</button>
+        <button @click=onTap class=row-key>R</button>
+        <button @click=onTap class=row-key>T</button>
+        <button @click=onTap class=row-key>Y</button>
+        <button @click=onTap class=row-key>U</button>
+        <button @click=onTap class=row-key>I</button>
+        <button @click=onTap class=row-key>O</button>
+        <button @click=onTap class=row-key>P</button>
       </div>
       <div class=row>
-        <button class=row-key>A</button>
-        <button class=row-key>S</button>
-        <button class=row-key>D</button>
-        <button class=row-key>F</button>
-        <button class=row-key>G</button>
-        <button class=row-key>H</button>
-        <button class=row-key>J</button>
-        <button class=row-key>K</button>
-        <button class=row-key>L</button>
+        <button @click=onTap class=row-key>A</button>
+        <button @click=onTap class=row-key>S</button>
+        <button @click=onTap class=row-key>D</button>
+        <button @click=onTap class=row-key>F</button>
+        <button @click=onTap class=row-key>G</button>
+        <button @click=onTap class=row-key>H</button>
+        <button @click=onTap class=row-key>J</button>
+        <button @click=onTap class=row-key>K</button>
+        <button @click=onTap class=row-key>L</button>
       </div>
       <div class=row>
-        <button id=key-return class=row-key>ENTER</button>
-        <button class=row-key>Z</button>
-        <button class=row-key>X</button>
-        <button class=row-key>C</button>
-        <button class=row-key>V</button>
-        <button class=row-key>B</button>
-        <button class=row-key>N</button>
-        <button class=row-key>M</button>
-        <button class=row-key>⬅</button>
+        <button @click=onReturn id=key-return class=row-key>ENTER</button>
+        <button @click=onTap class=row-key>Z</button>
+        <button @click=onTap class=row-key>X</button>
+        <button @click=onTap class=row-key>C</button>
+        <button @click=onTap class=row-key>V</button>
+        <button @click=onTap class=row-key>B</button>
+        <button @click=onTap class=row-key>N</button>
+        <button @click=onTap class=row-key>M</button>
+        <button @click=onBackspace class=row-key>⬅</button>
       </div>
     </div>
   </div>
 
-  <input autofocus maxlength=5 @keyup="onKeyup" />
+  <input id=hiddenfield autofocus maxlength=5 @keyup="onKeyup" unselectable="on" onselectstart="return false" />
 </template>
 
 <script>
@@ -46,29 +46,58 @@
 export default {
   name: 'KeyboardGrid',
   props: { },
-  emits: ["guess"],
+  emits: ["guess", "update"],
   data() {
     return {
       currentGuess: "",
     }
   },
   methods: {
+    onTap: function(event) {
+      let character = event.srcElement.innerText;
+      this._didType(character);
+    },
+    onBackspace: function() {
+      this._didTypeBackspace();
+    },
+    onReturn: function() {
+      this._didTypeReturn();
+    },
     onKeyup: function(event) {
       if (event.keyCode == 13) {
-        this.$emit("guess", this.currentGuess);
-        this.currentGuess = "";
+        this._didTypeReturn();
         return;
       }
       if (event.keyCode == 8) {
-        this.currentGuess = this.currentGuess.slice(0, -1);
+        this._didTypeBackspace();
         return;
       }
       if (event.keyCode < 65 || event.keyCode > 90) {
         console.log("bogus key", event.key, event.keyCode);
         return;
       }
+      if (this.currentGuess.length == 5) {
+        return;
+      }
 
-      this.currentGuess += event.key;
+      this._didType(event.key);
+    },
+    _didTypeBackspace() {
+      this.currentGuess = this.currentGuess.slice(0, -1);
+      this.$emit("update", this.currentGuess);
+    },
+    _didTypeReturn() {
+      if (this.currentGuess.length != 5) {
+        return;
+      }
+
+      this.$emit("guess", this.currentGuess);
+      this.currentGuess = "";
+      document.getElementById("hiddenfield").value = "";
+    },
+    _didType(letter) {
+      this.currentGuess += letter;
+      this.$emit("update", this.currentGuess);
     },
   },
 }
