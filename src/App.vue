@@ -29,7 +29,7 @@ export default {
     return {
       guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
-      solution: "avion".split(""),
+      solution: "selle".split(""),
     }
   },
   methods: {
@@ -47,6 +47,8 @@ export default {
     _validate: function(char, index) {
       if (char === this.solution[index]) {
         return "correct";
+      } else if (this.solution.indexOf(char) > -1) {
+        return "misplaced";
       } else {
         return "wrong";
       }
