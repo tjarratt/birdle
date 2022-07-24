@@ -1,7 +1,7 @@
 <template>
   <div id=wrapper>
     <div class=grid>
-      <GridRow v-for="(input, index) in guesses" :key="index" :input="input" /> 
+      <GridRow v-for="(guess, index) in guesses" :key="index" :input="guess.input" :invalid="guess.invalid" />
     </div>
   </div>
 </template>

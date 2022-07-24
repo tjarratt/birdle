@@ -1,5 +1,5 @@
 <template>
-  <div class=row>
+  <div class=row :class="{shake: invalid}">
     <div class=row-item :class="{correct: isCorrect(0), misplaced: isMisplaced(0)}">{{ characterAtIndex(0) }}</div>
     <div class=row-item :class="{correct: isCorrect(1), misplaced: isMisplaced(1)}">{{ characterAtIndex(1) }}</div>
     <div class=row-item :class="{correct: isCorrect(2), misplaced: isMisplaced(2)}">{{ characterAtIndex(2) }}</div>
@@ -11,19 +11,23 @@
 <script>
 
 function emptyState() {
-  return [
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-  ];
+  return {
+    invalid: false,
+    input: [
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+    ],
+  }
 }
 
 export default {
   name: 'GridRow',
   props: {
-    input: { type: Array, default: emptyState() },
+    input: { type: Array, default: emptyState().input },
+    invalid:{ type: Boolean, default: emptyState().invalid },
   },
   methods: {
     characterAtIndex: function(index) {
@@ -77,5 +81,28 @@ export default {
 .row-item.misplaced {
   background-color: #B29F4C;
 }
+
+.shake {
+  animation: shake 1s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(-5px); }
+
+  5% { ransform: translateX(5px); }
+
+  10% { ransform: translateX(-5px); }
+
+  15% { transform: translateX(5px); }
+
+  20% { transform: translateX(-5px); }
+
+  25% { transform: translateX(5px); }
+
+  30% { transform: translateX(-5px); }
+
+  35% { transform: translateX(0); }
+}
+
 
 </style>

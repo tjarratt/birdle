@@ -47,7 +47,7 @@ import dictionary from '../dictionary.js'
 export default {
   name: 'KeyboardGrid',
   props: { },
-  emits: ["guess", "update"],
+  emits: ["guess", "update", "invalid"],
   data() {
     return {
       currentGuess: "",
@@ -88,7 +88,7 @@ export default {
       this.$emit("update", this.currentGuess);
     },
     _didTypeReturn() {
-      if (this._isNotInDictionary(this.currentGuess)) { return; }
+      if (this._isNotInDictionary(this.currentGuess)) { this.$emit("invalid"); return; }
       if (this.currentGuess.length != 5) { return; }
 
       this.$emit("guess", this.currentGuess);

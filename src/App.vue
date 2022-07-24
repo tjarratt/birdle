@@ -1,7 +1,7 @@
 <template>
   <h1>Birdle</h1>
   <WordGrid :solution="solution" :guesses="guesses"/>
-  <KeyboardGrid @guess="submitGuess" @update="onTyping"/>
+  <KeyboardGrid @guess="submitGuess" @update="onTyping" @invalid="onInvalidWord"/>
 </template>
 
 <script>
@@ -10,18 +10,20 @@ import KeyboardGrid from './components/KeyboardGrid.vue'
 import dictionary from './dictionary.js'
 
 function emptyState() {
-  return [
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-    { value: "", state: "wrong"},
-  ];
+  return {
+    invalid: false,
+    input: [
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+      { value: "", state: "wrong"},
+    ],
+  }
 }
 
 function chooseRandomly(list) {
   let solution = list[daysIntoYear(new Date()) % list.length];
-  console.log("pssst the solution is", solution);
   return solution;
 }
 
@@ -50,8 +52,15 @@ export default {
     onTyping: function(rawInput) {
       this.guesses[this.guessCount] = this._guess(rawInput, this._alwaysWrong);
     },
+    onInvalidWord: function() {
+      console.log("current word is invalid");
+      this.guesses[this.guessCount].invalid = true;
+    },
     _guess: function(rawInput, validator) {
-      return rawInput.padEnd(5).split("").map((c, i) => ({value: c, state: validator(c, i)}));
+      return {
+        invalid: false,
+        input: rawInput.padEnd(5).split("").map((c, i) => ({valid: false, value: c, state: validator(c, i)})),
+      };
     },
     _alwaysWrong: function() { return "wrong"; },
     _validate: function(char, index) {
