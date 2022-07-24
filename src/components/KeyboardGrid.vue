@@ -96,7 +96,7 @@ export default {
       document.getElementById("hiddenfield").value = "";
     },
     _didType(letter) {
-      this.currentGuess += letter;
+      this.currentGuess += letter.toLowerCase();
       this.$emit("update", this.currentGuess);
     },
   },

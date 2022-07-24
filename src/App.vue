@@ -29,19 +29,27 @@ export default {
     return {
       guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
-      solution: "avion",
+      solution: "avion".split(""),
     }
   },
   methods: {
     submitGuess: function(rawInput) {
-      this.guesses[this.guessCount] = this._guess(rawInput);
+      this.guesses[this.guessCount] = this._guess(rawInput, this._validate);
       this.guessCount++;
     },
     onTyping: function(rawInput) {
-      this.guesses[this.guessCount] = this._guess(rawInput);
+      this.guesses[this.guessCount] = this._guess(rawInput, this._alwaysWrong);
     },
-    _guess: function(rawInput) {
-      return rawInput.padEnd(5).split("").map((c) => ({value: c, state: "wrong"}));
+    _guess: function(rawInput, validator) {
+      return rawInput.padEnd(5).split("").map((c, i) => ({value: c, state: validator(c, i)}));
+    },
+    _alwaysWrong: function() { return "wrong"; },
+    _validate: function(char, index) {
+      if (char === this.solution[index]) {
+        return "correct";
+      } else {
+        return "wrong";
+      }
     },
   },
 }

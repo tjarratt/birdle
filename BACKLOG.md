@@ -1,6 +1,6 @@
-* guess reveals feedback upon submission
-* user can make six guesses
+* guess reveals misplaced feedback upon submission
 * user can win
+* user can make at most six guesses
 * user can lose
 * cannot submit unless word is a dictionary word
 * word of the day changes every day
