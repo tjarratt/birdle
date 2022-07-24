@@ -7,6 +7,7 @@
 <script>
 import WordGrid from './components/WordGrid.vue'
 import KeyboardGrid from './components/KeyboardGrid.vue'
+import dictionary from './dictionary.js'
 
 function emptyState() {
   return [
@@ -18,6 +19,15 @@ function emptyState() {
   ];
 }
 
+function chooseRandomly(list) {
+  let solution = list[daysIntoYear(new Date()) % list.length];
+  console.log("pssst the solution is", solution);
+  return solution;
+}
+
+function daysIntoYear(date){
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+}
 
 export default {
   name: 'App',
@@ -29,7 +39,7 @@ export default {
     return {
       guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
-      solution: "selle".split(""),
+      solution: chooseRandomly(dictionary),
     }
   },
   methods: {

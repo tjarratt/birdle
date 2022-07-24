@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import dictionary from '../dictionary.js'
 
 export default {
   name: 'KeyboardGrid',
@@ -76,7 +77,7 @@ export default {
         console.log("bogus key", event.key, event.keyCode);
         return;
       }
-      if (this.currentGuess.length == 5) {
+      if (this.currentGuess.length >= 5) {
         return;
       }
 
@@ -87,9 +88,8 @@ export default {
       this.$emit("update", this.currentGuess);
     },
     _didTypeReturn() {
-      if (this.currentGuess.length != 5) {
-        return;
-      }
+      if (this._isNotInDictionary(this.currentGuess)) { return; }
+      if (this.currentGuess.length != 5) { return; }
 
       this.$emit("guess", this.currentGuess);
       this.currentGuess = "";
@@ -98,6 +98,9 @@ export default {
     _didType(letter) {
       this.currentGuess += letter.toLowerCase();
       this.$emit("update", this.currentGuess);
+    },
+    _isNotInDictionary(word) {
+      return dictionary.indexOf(word) == -1;
     },
   },
 }
