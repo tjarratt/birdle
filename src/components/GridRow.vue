@@ -1,23 +1,33 @@
 <template>
   <div class=row>
-    <div class=row-item>{{ itemForIndex(0) }}</div>
-    <div class=row-item>{{ itemForIndex(1) }}</div>
-    <div class=row-item>{{ itemForIndex(2) }}</div>
-    <div class=row-item>{{ itemForIndex(3) }}</div>
-    <div class=row-item>{{ itemForIndex(4) }}</div>
+    <div class=row-item>{{ characterAtIndex(0) }}</div>
+    <div class=row-item>{{ characterAtIndex(1) }}</div>
+    <div class=row-item>{{ characterAtIndex(2) }}</div>
+    <div class=row-item>{{ characterAtIndex(3) }}</div>
+    <div class=row-item>{{ characterAtIndex(4) }}</div>
   </div>
 </template>
 
 <script>
 
+function emptyState() {
+  return [
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+  ];
+}
+
 export default {
   name: 'GridRow',
   props: {
-    input: { type: String, default: () => "" },
+    input: { type: Array, default: emptyState() },
   },
   methods: {
-    itemForIndex: function(index) {
-      return this.input[index];
+    characterAtIndex: function(index) {
+      return this.input[index].value;
     },
   },
 }

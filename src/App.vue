@@ -8,6 +8,17 @@
 import WordGrid from './components/WordGrid.vue'
 import KeyboardGrid from './components/KeyboardGrid.vue'
 
+function emptyState() {
+  return [
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+    { value: "", state: "wrong"},
+  ];
+}
+
+
 export default {
   name: 'App',
   components: {
@@ -16,19 +27,21 @@ export default {
   },
   data() {
     return {
-      guesses: ["", "", "", "", "", ""],
+      guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
-      currentGuess: "",
       solution: "avion",
     }
   },
   methods: {
-    submitGuess: function(guess) {
-      this.guesses[this.guessCount] = (guess);
+    submitGuess: function(rawInput) {
+      this.guesses[this.guessCount] = this._guess(rawInput);
       this.guessCount++;
     },
-    onTyping: function(guess) {
-      this.guesses[this.guessCount] = guess;
+    onTyping: function(rawInput) {
+      this.guesses[this.guessCount] = this._guess(rawInput);
+    },
+    _guess: function(rawInput) {
+      return rawInput.padEnd(5).split("").map((c) => ({value: c, state: "wrong"}));
     },
   },
 }

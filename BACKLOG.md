@@ -1,4 +1,3 @@
-* cannot submit until word is 5 letters
 * guess reveals feedback upon submission
 * user can make six guesses
 * user can win
