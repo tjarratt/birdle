@@ -1,6 +1,3 @@
-* feedback on the keyboard when a letter is in the right place
-* feedback on the keyboard when a letter is somewhere in the word
-* feedback on the keyboard when a letter is not in the word
 * feedback when the word is not in the word list (toast)
 * user can win
 * user can make at most six guesses

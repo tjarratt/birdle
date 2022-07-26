@@ -212,4 +212,5 @@ export default [
   "ocean",
   "buche",
   "tondu",
+  "tordu",
 ];

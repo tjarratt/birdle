@@ -1,7 +1,7 @@
 <template>
   <h1>Birdle</h1>
-  <WordGrid :solution="solution" :guesses="guesses"/>
-  <KeyboardGrid @guess="submitGuess" @update="onTyping" @invalid="onInvalidWord"/>
+  <WordGrid :guesses="guesses"/>
+  <KeyboardGrid :hints="keyHints" @guess="submitGuess" @update="onTyping" @invalid="onInvalidWord"/>
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
       guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
       solution: chooseRandomly(dictionary),
+      keyHints: {},
     }
   },
   methods: {
@@ -65,10 +66,13 @@ export default {
     _alwaysWrong: function() { return "wrong"; },
     _validate: function(char, index) {
       if (char === this.solution[index]) {
+        this.keyHints[char] = "correct";
         return "correct";
       } else if (this.solution.indexOf(char) > -1) {
+        this.keyHints[char] = "misplaced";
         return "misplaced";
       } else {
+        this.keyHints[char] = "wrong";
         return "wrong";
       }
     },
