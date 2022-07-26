@@ -209,4 +209,7 @@ export default [
   "toute",
   "jeter",
   "peter",
+  "ocean",
+  "buche",
+  "tondu",
 ];
