@@ -59,7 +59,7 @@ export default {
     _guess: function(rawInput, validator) {
       return {
         invalid: false,
-        input: rawInput.padEnd(5).split("").map((c, i) => ({valid: false, value: c, state: validator(c, i)})),
+        input: rawInput.padEnd(5).split("").map((c, i) => ({value: c, state: validator(c, i)})),
       };
     },
     _alwaysWrong: function() { return "wrong"; },
