@@ -1,6 +1,4 @@
-* feedback when the word is not in the word list (toast)
 * user can win
-* user can make at most six guesses
 * user can lose
 * visual animation for when the word is submitted
 * visual animation for when the game is won

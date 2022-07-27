@@ -1,5 +1,6 @@
 <template>
   <h1>Birdle</h1>
+  <PopToast v-if="toastMessage" @faded="onFaded" :message="toastMessage"/>
   <WordGrid :guesses="guesses"/>
   <KeyboardGrid :hints="keyHints" @guess="submitGuess" @update="onTyping" @invalid="onInvalidWord"/>
 </template>
@@ -7,6 +8,7 @@
 <script>
 import WordGrid from './components/WordGrid.vue'
 import KeyboardGrid from './components/KeyboardGrid.vue'
+import PopToast from './components/PopToast.vue'
 import dictionary from './dictionary.js'
 
 function emptyState() {
@@ -35,6 +37,7 @@ export default {
   components: {
     WordGrid,
     KeyboardGrid,
+    PopToast,
   },
   data() {
     return {
@@ -43,6 +46,7 @@ export default {
       guessCount: 0,
       solution: chooseRandomly(dictionary),
       keyHints: {},
+      toastMessage: "",
     }
   },
   methods: {
@@ -62,7 +66,11 @@ export default {
     onInvalidWord: function() {
       if (!this.playable) { return; }
 
+      this.toastMessage = "Ce n'est pas un mot valid";
       this.guesses[this.guessCount].invalid = true;
+    },
+    onFaded: function() {
+      this.toastMessage = "";
     },
     _guess: function(rawInput, validator) {
       return {
