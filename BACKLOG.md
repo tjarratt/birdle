@@ -3,6 +3,8 @@
 * user can make at most six guesses
 * user can lose
 * visual animation for when the word is submitted
+* visual animation for when the game is won
+* force refresh if today is different from when it was loaded
 * save state locally (in case of refresh)
 * user can play again the next day
 * letters POP when typed
