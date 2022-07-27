@@ -23,8 +23,7 @@ function emptyState() {
 }
 
 function chooseRandomly(list) {
-  let solution = list[daysIntoYear(new Date()) % list.length];
-  return solution;
+  return list[daysIntoYear(new Date()) % list.length];
 }
 
 function daysIntoYear(date){
@@ -39,6 +38,7 @@ export default {
   },
   data() {
     return {
+      playable: true,
       guesses: [emptyState(), emptyState(), emptyState(), emptyState(), emptyState(), emptyState() ],
       guessCount: 0,
       solution: chooseRandomly(dictionary),
@@ -47,14 +47,21 @@ export default {
   },
   methods: {
     submitGuess: function(rawInput) {
+      if (!this.playable) { return; }
+
       this.guesses[this.guessCount] = this._guess(rawInput, this._validate);
       this.guessCount++;
+
+      this.playable = this.guessCount < 6;
     },
     onTyping: function(rawInput) {
+      if (!this.playable) { return; }
+
       this.guesses[this.guessCount] = this._guess(rawInput, this._alwaysWrong);
     },
     onInvalidWord: function() {
-      console.log("current word is invalid");
+      if (!this.playable) { return; }
+
       this.guesses[this.guessCount].invalid = true;
     },
     _guess: function(rawInput, validator) {
