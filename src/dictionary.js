@@ -213,4 +213,6 @@ export default [
   "buche",
   "tondu",
   "tordu",
+  "raton",
+  "woden",
 ];
