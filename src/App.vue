@@ -32,6 +32,12 @@ function daysIntoYear(date){
     return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
 }
 
+function successToastMessage(attemptNumber) {
+  return [
+    "Genius", "Magnificient", "Impressive", "Splendid", "Great", "Phew",
+  ][attemptNumber];
+}
+
 export default {
   name: 'App',
   components: {
@@ -52,6 +58,10 @@ export default {
   methods: {
     submitGuess: function(rawInput) {
       if (!this.playable) { return; }
+      if (rawInput == this.solution) {
+        this.toastMessage = successToastMessage(this.guessCount);
+        this.playable = false;
+      }
 
       this.guesses[this.guessCount] = this._guess(rawInput, this._validate);
       this.guessCount++;
