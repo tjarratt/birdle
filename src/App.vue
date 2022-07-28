@@ -94,7 +94,7 @@ export default {
         this.keyHints[char] = "correct";
         return "correct";
       } else if (this.solution.indexOf(char) > -1) {
-        this.keyHints[char] = "misplaced";
+        this.keyHints[char] ||= "misplaced";
         return "misplaced";
       } else {
         this.keyHints[char] = "wrong";

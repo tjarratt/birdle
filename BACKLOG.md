@@ -1,4 +1,3 @@
-* if letter both misplaced and correct, prefer correct
 * cannot type once you've won
 * win visual animation each letter jumps up, one after another
 * user can win :: save state (number of attempts)
