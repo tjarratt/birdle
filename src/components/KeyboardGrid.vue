@@ -74,7 +74,6 @@ export default {
         return;
       }
       if (event.keyCode < 65 || event.keyCode > 90) {
-        console.log("bogus key", event.key, event.keyCode);
         return;
       }
       if (this.currentGuess.length >= 5) {

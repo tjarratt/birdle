@@ -15,7 +15,6 @@ export default {
     };
   },
   mounted: function() {
-    console.log("before");
     window.setTimeout(function() { 
       this.fade = true;
       window.setTimeout(function () { this.$emit("faded"); }.bind(this), 1000);
