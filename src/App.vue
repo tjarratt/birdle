@@ -58,14 +58,16 @@ export default {
   methods: {
     submitGuess: function(rawInput) {
       if (!this.playable) { return; }
+
+      this.guesses[this.guessCount] = this._guess(rawInput, this._validate);
+
       if (rawInput == this.solution) {
         this.toastMessage = successToastMessage(this.guessCount);
         this.playable = false;
+        return;
       }
 
-      this.guesses[this.guessCount] = this._guess(rawInput, this._validate);
       this.guessCount++;
-
       this.playable = this.guessCount < 6;
     },
     onTyping: function(rawInput) {
