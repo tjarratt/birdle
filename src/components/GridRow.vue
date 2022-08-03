@@ -72,6 +72,8 @@ export default {
   font-size: 2em;
   font-weight: bold;
   line-height: 2em;
+
+  touch-action: none;
 }
 
 .row-item.correct {

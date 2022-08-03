@@ -111,6 +111,8 @@ export default {
 body {
   margin: 0;
   background-color: #121213;
+  
+  touch-action: none;
 }
 #app {
   margin: 0;
