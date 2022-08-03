@@ -1,3 +1,5 @@
+* disable double tap to zoom on mobile
+* disable selection of text 
 * win visual animation each letter jumps up, one after another
 * user can win :: save state (number of attempts)
 * user can lose :: save state
@@ -7,8 +9,10 @@
 * letters POP when typed
 * cannot select text on screen
 * mobile friendly: disable zoom
+* remove the input and listen to keyboard events directly
+* run lighthouse on it
+* force refresh if today is different from when it was loaded
 * make it look good enough on desktop
 * show stats at the end of the game
-* force refresh if today is different from when it was loaded
 * think about how to handle random word if len(dict) > 365
 
