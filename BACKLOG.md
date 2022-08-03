@@ -1,5 +1,3 @@
-* disable double tap to zoom on mobile
-* disable selection of text 
 * win visual animation each letter jumps up, one after another
 * user can win :: save state (number of attempts)
 * user can lose :: save state
