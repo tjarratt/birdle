@@ -3,7 +3,6 @@ export default [
   "après",
   "arbre",
   "mardi",
-  "jardon",
   "maman",
   "matin",
   "sapin",
