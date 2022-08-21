@@ -16,7 +16,7 @@ export default [
   "lundi",
   "jeudi",
   "petit",
-  "dîner",
+  "diner",
   "noire",
   "boire",
   "avoir",
